@@ -1,0 +1,62 @@
+@model Form
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form da compilare</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Stile personalizzato per allineare le caselle di testo */
+        .form-control {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Form da compilare</h1>
+
+    <form class="m-2" method="post" asp-action="Conferma">
+        <div class="form-group">
+            <label for="Nome">Nome:</label>
+            <input type="text" id="Nome" name="Nome" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Cognome">Cognome:</label>
+            <input type="text" id="Cognome" name="Cognome" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            <input type="email" id="Email" name="Email" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="DataDiNascita">Data di nascita:</label>
+            <input type="date" id="DataDiNascita" name="DataDiNascita" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label>Sesso:</label><br>
+            <input type="radio" id="Maschio" name="Sesso" value="Maschio" required>
+            <label for="Maschio">Maschio</label>
+            <input type="radio" id="Femmina" name="Sesso" value="Femmina" required>
+            <label for="Femmina">Femmina</label><br>
+            <input type="radio" id="NonSpecificabile" name="Sesso" value="NonSpecificabile" required>
+            <label for="NonSpecificabile">NonSpecificabile</label><br>
+        </div>
+
+        <div class="form-group">
+            <label for="Ruolo">Ruolo:</label>
+            <select id="Ruolo" name="Ruolo" class="form-control" required>
+                <option value="Studente">Studente</option>
+                <option value="Insegnante">Insegnante</option>
+                <option value="Personale">Personale</option>
+            </select>
+        </div>
+
+        <button type="submit" id="bottonePrenotazione" class="btn btn-primary">Prenota</button>
+
+    </form>
+</body>
+</html>

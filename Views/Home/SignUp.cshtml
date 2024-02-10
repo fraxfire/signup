@@ -1,0 +1,65 @@
+@model SignUp
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registrazione</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .input-container {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .input-container input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            margin-bottom: 4px;
+            box-sizing: border-box;
+        }
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registrazione</h1>
+
+    <form class="m-2" method="post" asp-action="Registra" onsubmit="return validatePasswords()">
+        <div class="input-container">
+            <label for="Nome Utente">Nome_Utente:</label>
+            <input type="text" id="Nome_Utente" name="Nome_Utente" class="form-control" required>
+        </div>
+
+        <div class="input-container">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+        </div>
+
+        <div class="input-container">
+            <label for="confirm_password">Conferma Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password">
+            <div id="password-error" class="error-message"></div>
+        </div>
+
+        <button type="submit" id="bottoneRegistrazione" class="btn btn-primary">SignUp</button>
+    </form>
+
+    <script>
+        function validatePasswords() {
+            var password = document.getElementById("password").value;
+            var confirm_password = document.getElementById("confirm_password").value;
+
+            if (password !== confirm_password) {
+                document.getElementById("password-error").innerText = "Le password non coincidono.";
+                return false;
+            } else {
+                document.getElementById("password-error").innerText = "";
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>
