@@ -1,7 +1,6 @@
-namespace PrimaWeb.Models;
+namespace SignBootstrap.Models;
 public class SignUp{
-    public string? Nome_Utente { get; set; }
-    public string? Password {get; set; }
-    public string? confirm_Password {get; set; }
-
+    public string? Username { get; set; }
+    public string? PW {get; set; }
+    public string? confirm_PW {get; set; }
 }

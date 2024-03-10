@@ -1,4 +1,4 @@
-namespace PrimaWeb.Models;
+namespace SignBootstrap.Models;
 
 public class ErrorViewModel
 {

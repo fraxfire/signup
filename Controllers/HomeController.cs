@@ -1,44 +1,36 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using PrimaWeb.Models;
+using SignBootstrap.Models;
 
-namespace PrimaWeb.Controllers;
+namespace SignBootstrap.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    public readonly ILogger<HomeController> _logger;
 
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
     }
 
+    private string isAuthenticated = "true";
+
+
     public IActionResult Index()
     {
+        string? isAuthenticated = HttpContext.Session.GetString("isAuthenticated");
         return View();
     }
 
     public IActionResult Privacy()
     {
-        return View();
+        string? isAuthenticated = HttpContext.Session.GetString("isAuthenticated");
+        if (isAuthenticated == "OK")
+            return View();
+        return Redirect("\\home\\Login");
+        
     }
     
-    [HttpGet]
-    public IActionResult Prenota()
-    {
-        return View( );
-    }
-    [HttpPost]
-    public IActionResult Conferma(Prenotazione p)
-    {
-        return View(p);
-    }
-        
-    [HttpGet]
-    public IActionResult Form()
-    {
-        return View( );
-    }
 
     public IActionResult SignUp()
     {
@@ -51,28 +43,43 @@ public class HomeController : Controller
         return View(s);
     }
 
+    
     [HttpGet]
-    public IActionResult Purchase()
+    public ActionResult Login()
     {
-        return View( );
+        return View();
     }
     
     [HttpPost]
-    public IActionResult Cart(Purchase C)
+    public IActionResult Login(Login L)
     {
-        return View(C);
+    // Verifica che le credenziali siano corrette
+    if (L.Nome_Utente == "q" && L.Password == "q")
+    {
+        // Imposta isAuthenticated a true nella sessione
+        HttpContext.Session.SetString("isAuthenticated", "OK");
+        return RedirectToAction("IndexAuth"); // Reindirizza alla homepage
+    }
+    else
+    {
+         HttpContext.Session.SetString("isAuthenticated", "K.O");
+        // Se le credenziali non sono corrette, mostra un messaggio di errore o reindirizza a una pagina di login fallito
+        ViewBag.ErrorMessage = "Credenziali non valide. Riprova.";
+        return View();
+    }
+    }
+
+    [HttpGet]
+    public IActionResult IndexAuth()
+    {
+        return View();
     }
 
     [HttpPost]
-    public IActionResult AddToCart(Purchase purchase)
+    public IActionResult IndexAuth(string isAuthenticated)
     {
-        var purchaseController = new PurchaseController();
-        return purchaseController.AddToCart(purchase);
+        return View();
     }
-
-    
-
-    
 
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
